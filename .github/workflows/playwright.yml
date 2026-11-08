@@ -11,6 +11,6 @@ jobs:
         with:
           node-version: 20
       - run: npm install playwright && npx playwright install --with-deps chromium
-      - run: node NAZWA-PLIKU.js
+      - run: node runner.js
         env:
           LOCAL_STORAGE_JSON: ${{ secrets.LOCAL_STORAGE_JSON }}
