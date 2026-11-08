@@ -13,14 +13,14 @@ jobs:
   send-requests:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute POST requests at 6.2s intervals
+      - name: Execute POST requests at 4.5s intervals
         env:
           API_URL: "https://api-prox.tnstats.dev/web/post/UCZvFABFgKLEVYN2n4-GZJng"
           AUTH_HEADER: "Bearer ${{ secrets.API_TOKEN }}"
           REQUEST_BODY: '{"type":"music video","gain":520000}'
           DURATION_MINUTES: ${{ inputs.duration_minutes }}
         run: |
-          echo "Starting POST requests to $API_URL every 6.2 seconds..."
+          echo "Starting POST requests to $API_URL every 4.5 seconds..."
           
           # Calculate the end time based on user input
           end_time=$(( $(date +%s) + (DURATION_MINUTES * 60) ))
@@ -37,8 +37,8 @@ jobs:
             
             echo "[$(date -u +'%Y-%m-%d %H:%M:%S UTC')] Request sent | Status: $http_status | Response: $body"
             
-            # Wait 6.2 seconds before the next request
-            sleep 6.2
+            # Wait 4.5 seconds before the next request
+            sleep 4.5
           done
           
           echo "Finished running scheduled POST requests."
