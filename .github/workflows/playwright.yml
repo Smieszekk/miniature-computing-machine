@@ -1,0 +1,16 @@
+name: Playwright Grind
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install playwright && npx playwright install --with-deps chromium
+      - run: node NAZWA-PLIKU.js
+        env:
+          LOCAL_STORAGE_JSON: ${{ secrets.LOCAL_STORAGE_JSON }}
