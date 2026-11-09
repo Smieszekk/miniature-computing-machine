@@ -2,7 +2,7 @@
   const START_DELAY_MS = 300;
   
   // === CONFIGURABLE INTERVALS (in milliseconds) & SETTINGS ===
-  const INTERVAL_ITEM19_MS = 6050;   // How often Item 19 runs
+  const INTERVAL_ITEM19_MS = 100;   // How often Item 19 runs
   const INTERVAL_BOOST_MS = 152500;   // How often Boost runs (e.g., every 2 seconds)
   const INTERVAL_COLLAB_MS = 301000;  // How often Collab runs (e.g., every 1 second)
   const TARGET_CHANNEL_ID = 'UCz9li2hCp-aE1notlZcb94Q'; // Change this to your target channel ID
