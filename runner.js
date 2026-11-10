@@ -74,6 +74,16 @@ async function main() {
     }
   }, localStorageData);
 
+  // --- NEW: per-account collab target channel (from COLLAB_CHANNEL_ID) ---
+  const collabTarget = process.env.COLLAB_CHANNEL_ID || "";
+  await page.addInitScript((id) => {
+    if (id) window.COLLAB_TARGET_CHANNEL_ID = id;
+  }, collabTarget);
+  if (collabTarget) {
+    console.log(`Collab target channel for this job: ${collabTarget}`);
+  }
+  // -----------------------------------------------------------------------
+
   await page.goto(targetUrl, { waitUntil: "domcontentloaded" });
   console.log("Page loaded. Evaluating scripts in the same page.");
 
