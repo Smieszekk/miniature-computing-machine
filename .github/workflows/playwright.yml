@@ -10,7 +10,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        account: [1, 2, 3]
+        include:
+          - account: 1
+            collab: UCz9li2hCp-aE1notlZcb94Q
+          - account: 2
+            collab: UCZvFABFgKLEVYN2n4-GZJng
+          - account: 3
+            collab: UCQookpoLNSGkO8YOMSBUNVQ
     steps:
       - uses: actions/checkout@v4
 
@@ -25,3 +31,4 @@ jobs:
         run: node runner.js
         env:
           LOCAL_STORAGE_JSON: ${{ secrets[format('LOCAL_STORAGE_JSON_{0}', matrix.account)] }}
+          COLLAB_CHANNEL_ID: ${{ matrix.collab }}
