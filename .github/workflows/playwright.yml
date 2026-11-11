@@ -5,7 +5,7 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 355
     strategy:
       fail-fast: false
@@ -25,7 +25,14 @@ jobs:
           node-version: 20
 
       - name: Install Playwright
-        run: npm install playwright && npx playwright install --with-deps chromium
+        run: |
+          npm install playwright
+          for i in 1 2 3; do
+            npx playwright install --with-deps chromium && exit 0
+            echo "Attempt $i failed, retrying in 15s..."
+            sleep 15
+          done
+          exit 1
 
       - name: Run grinder (account ${{ matrix.account }})
         run: node runner.js
