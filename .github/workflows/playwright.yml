@@ -7,16 +7,6 @@ jobs:
   run:
     runs-on: ubuntu-24.04
     timeout-minutes: 355
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - account: 1
-            collab: UCz9li2hCp-aE1notlZcb94Q
-          - account: 2
-            collab: UCZvFABFgKLEVYN2n4-GZJng
-          - account: 3
-            collab: UCQookpoLNSGkO8YOMSBUNVQ
     steps:
       - uses: actions/checkout@v4
 
@@ -34,8 +24,8 @@ jobs:
           done
           exit 1
 
-      - name: Run grinder (account ${{ matrix.account }})
+      - name: Run grinder
         run: node runner.js
         env:
-          LOCAL_STORAGE_JSON: ${{ secrets[format('LOCAL_STORAGE_JSON_{0}', matrix.account)] }}
-          COLLAB_CHANNEL_ID: ${{ matrix.collab }}
+          LOCAL_STORAGE_JSON: ${{ secrets.LOCAL_STORAGE_JSON_3 }}
+          COLLAB_CHANNEL_ID: UCTqJpW96pPJ4rhyqXBAvs0w
