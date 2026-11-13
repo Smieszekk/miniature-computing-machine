@@ -3,8 +3,8 @@
   
   // === CONFIGURABLE INTERVALS (in milliseconds) & SETTINGS ===
   const INTERVAL_ITEM19_MS = 100;   // How often Item 19 runs
-  const INTERVAL_BOOST_MS = 152500;   // How often Boost runs (e.g., every 2 seconds)
-  const INTERVAL_COLLAB_MS = 301000;  // How often Collab runs (e.g., every 1 second)
+  const INTERVAL_BOOST_MS = 152500;   // How often Boost runs
+  const INTERVAL_COLLAB_MS = 301000;  // How often Collab runs
   const TARGET_CHANNEL_ID = window.COLLAB_TARGET_CHANNEL_ID || 'UCTqJpW96pPJ4rhyqXBAvs0w';
   // =========================================================
 
@@ -52,6 +52,11 @@
   const item19Def = getItem19();
   const boostDef = getBoostCommand();
   const collabDef = getCollabCommand();
+
+  // Warn about each command that was not found
+  if (!item19Def) console.warn('WARN: Item command (CONTENT_COMMANDS[18]) NOT found.');
+  if (!boostDef) console.warn('WARN: BOOST_COMMAND NOT found.');
+  if (!collabDef) console.warn('WARN: COLLAB_COMMAND NOT found - collab will not run.');
 
   if (!item19Def && !boostDef && !collabDef) {
     console.error('No commands found (Item 19, BOOST_COMMAND, or COLLAB_COMMAND) — run this after the page has fully loaded.');
@@ -124,7 +129,13 @@
           labelEl.textContent = collabDef.label || 'Collab';
           collabButton.appendChild(labelEl);
 
-          window.doCommand(collabObj, collabButton);
+          console.log('COLLAB sending:', JSON.stringify(collabObj));
+          const result = window.doCommand(collabObj, collabButton);
+          if (result && typeof result.then === 'function') {
+            result
+              .then(r => console.log('COLLAB result:', r))
+              .catch(e => console.error('COLLAB failed:', e));
+          }
         } catch (err) {
           console.error('doCommand (collab) threw:', err);
         }
