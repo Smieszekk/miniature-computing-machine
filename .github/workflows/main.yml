@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Execute POST requests at 6.2s intervals
         env:
-          API_URL: "https://api-prox.tnstats.dev/web/post/UCZvFABFgKLEVYN2n4-GZJng"
+          API_URL: "https://api-prox.tnstats.dev/web/post/UCz9li2hCp-aE1notlZcb94Q"
           AUTH_HEADER: "Bearer ${{ secrets.API_TOKEN }}"
           REQUEST_BODY: '{"type":"music video","gain":520000}'
           DURATION_MINUTES: ${{ inputs.duration_minutes }}
